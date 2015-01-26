@@ -1,0 +1,39 @@
+Meteor.startup(function(){
+	/*return Meteor.methods({
+		'removeArticles':function(){
+			Articles.remove({});
+		},
+		'removeLike':function(){
+			Likes.remove({_id:id});
+		},
+                'removeArticle': function(id){
+                      Articles.remove({_id:id});
+                }
+
+
+	});*/
+if(Categories.find().count() === 0){
+       Categories.insert({catgry:'Travel'});
+      Categories.insert({catgry:'Technology'});
+         Categories.insert({catgry:'Entertainment'});
+         Categories.insert({catgry:'Business'});
+         Categories.insert({catgry:'Nature'});
+        Categories.insert({catgry:'Health'}); 
+}
+    
+});
+Meteor.methods({
+		'removeArticles':function(){
+			Articles.remove({});
+		},
+		'removeLike':function(){
+			Likes.remove({_id:id});
+		},
+                'removeArticle': function(id){
+                      Articles.remove({_id:id});
+                }
+
+
+	});
+
+

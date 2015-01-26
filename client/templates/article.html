@@ -1,0 +1,80 @@
+<template name="article">
+
+
+   <div class="item">
+    <div class="ui special cards">
+  <div class="card">
+    <div class="dimmable image">
+      <div class="ui dimmer">
+        <div class="content">
+          <div class="center">
+          {{#if currentUser}}
+            <div class="ui inverted button">
+            	
+            	<a href="#" class="like">
+				<i class="heart icon"></i> Like
+			</a>   
+            </div>
+             {{/if}}	
+          </div>
+        </div>
+      </div>
+ <!-- <iframe height="{{height}}" src="{{src}}"></iframe>-->
+  
+  <img src="{{src}}"/>
+
+
+  <script>$('.special.cards .image').dimmer({
+  on: 'hover'
+});</script>
+
+    </div>
+    <div class="content">
+      <a class="header">{{name}}</a>
+      <div class="meta">
+        <span class="date">{{time}}</span><br><br><div class="ui red horizontal label"><a href="/{{category}}">{{category}}</a></div>
+      </div>
+    </div>
+    <div class="extra content">
+      <a>
+      
+      {{#if currentUser}}	  
+		<p>
+			<a href="#" class="like">
+			<i style="color:#564f8a;" class="heart icon"></i>
+			</a>
+		
+			<a class="ui purple circular label">
+              {{numlikes}} likes
+               </a>&nbsp;&nbsp;
+			  <div class="ui red horizontal label">{{likethis}}</div><br>
+			{{#if isAuthor}}
+      <a class="remove"><i style="color:#d95c5c;" class="remove icon">{{removeArticle}}</i></a>
+      <!--&nbsp;<a class="edit"><i style="color:#d95c5c;" class="write icon"></i></a>-->
+      		{{/if}}
+    
+          
+		</p><br>
+		{{/if}}	
+      </a>
+      <div class="description">
+      <p>{{description}}</p>
+     
+    </div>
+     {{#if currentUser}}
+      <div class="ui horizontal divider"><i class="empty star icon"></i>
+  </div> 
+    <div class="extra content">
+    <div class="right floated author">
+    Posted by {{userEmail}}
+    </div>
+  </div>
+  {{/if}}	
+    </div>
+  </div>
+</div>
+
+</div>
+
+</template>
+

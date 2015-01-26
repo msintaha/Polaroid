@@ -1,0 +1,15 @@
+<template name="pinterest">
+	
+	<input type="hidden" name="updated" value="{{updated}}" id="updated">
+	{{#if adding_interest}}
+	{{>addform}}
+	{{/if}}
+	
+		<ul class="clearfix" style="display:inline-flex;">
+		{{#each articles}}
+	<li style="margin-right: 4%;">{{>article}}</li>
+			 
+		{{/each}}
+		</ul>
+		
+</template>
