@@ -9,13 +9,11 @@
         <div class="content">
           <div class="center">
           {{#if currentUser}}
+          <a href="#" class="like">
             <div class="ui inverted button">
-            	
-            	<a href="#" class="like">
-				<i class="heart icon"></i> Like
-			</a>   
-            </div>
-             {{/if}}	
+        <i class="heart icon"></i> Like
+            </div></a> 
+             {{/if}}  
           </div>
         </div>
       </div>
@@ -30,37 +28,33 @@
 
     </div>
     <div class="content">
-      <a class="header">{{name}}</a>
+      <a class="header" href="/article/{{_id}}" target="_blank">{{name}}</a>
       <div class="meta">
-        <span class="date">{{time}}</span><br><br><div class="ui red horizontal label"><a href="/{{category}}">{{category}}</a></div>
+        <span class="date">{{time}}</span><br><br><div class="ui red horizontal label"><a href="/{{category}}">{{category}}</a></div>&nbsp;<a href="/article/{{_id}}/"><i class="comments outline icon" style="font-size: 17px;color:#564f8a;"></i></a>
       </div>
     </div>
     <div class="extra content">
       <a>
       
-      {{#if currentUser}}	  
-		<p>
-			<a href="#" class="like">
-			<i style="color:#564f8a;" class="heart icon"></i>
-			</a>
-		
-			<a class="ui purple circular label">
+      {{#if currentUser}}   
+    <p>
+      <a href="#" class="like">
+      <i style="color:#564f8a;" class="heart icon"></i>
+      </a>
+    
+      <a class="ui purple circular label">
               {{numlikes}} likes
                </a>&nbsp;&nbsp;
-			  <div class="ui red horizontal label">{{likethis}}</div><br>
-			{{#if isAuthor}}
+        <div class="ui red horizontal label">{{likethis}}</div><br>
+      {{#if isAuthor}}
       <a class="remove"><i style="color:#d95c5c;" class="remove icon">{{removeArticle}}</i></a>
       <!--&nbsp;<a class="edit"><i style="color:#d95c5c;" class="write icon"></i></a>-->
-      		{{/if}}
-    
+          {{/if}}<br>
+
           
-		</p><br>
-		{{/if}}	
+    </p><br>
+    {{/if}} 
       </a>
-      <div class="description">
-      <p>{{description}}</p>
-     
-    </div>
      {{#if currentUser}}
       <div class="ui horizontal divider"><i class="empty star icon"></i>
   </div> 
@@ -69,7 +63,7 @@
     Posted by {{userEmail}}
     </div>
   </div>
-  {{/if}}	
+  {{/if}} 
     </div>
   </div>
 </div>

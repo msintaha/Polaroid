@@ -11,6 +11,13 @@ Router.map(function(){
 	   this.route('health', {path: '/health'});
 	    this.route('nature', {path: '/nature'});
 	     this.route('technology', {path: '/technology'});
-
+	this.route('/article/:_id', function () {
+  this.render('post', {
+    data: function () {
+      return Articles.findOne({_id: this.params._id});
+    }
+  });
+});
+	
 });
 

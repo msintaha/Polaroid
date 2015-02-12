@@ -15,6 +15,21 @@ Template.article.events({
 	
 });
 
+Template.post.events({
+	'click #cmnt':function(evt,tmpl){
+		evt.preventDefault();
+		var comment=tmpl.find('.please').value;
+		var date=new Date();
+		Comments.insert({
+			comm:comment,
+			poster:Meteor.user().username,
+			timestamp:date.toLocaleDateString()+' at '+date.toLocaleTimeString(),
+			article:tmpl.data._id
+		});
+		Session.set('updated',new Date());
+	}
+});
+
 Template.nav.events({
 	'click .addInterest':function(evt,tmpl){
 		evt.preventDefault();
@@ -27,26 +42,30 @@ Template.nav.events({
 	
 });
 Template.addform.events({
+	 'change .img': function(event, template) {
+    FS.Utility.eachFile(event, function(file) {
+      Images.insert(file, function (err, fileObj) {
+        //Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+      });
+    });
+  },
 	'click .save':function(evt,tmpl){
 		var description = tmpl.find('.description').value;
 		var name = tmpl.find('.name').value;
 		var url = tmpl.find('.url').value;
-		
 		var date=new Date();
 		var cat = tmpl.find('.selectCat').value;
-		
-		// var playerNameVar = evt.target.author.value;
-		//var height = getRandomInt(150,350);
+		//var img=file.name;
 		
 		Articles.insert({
 			description:description,
 			name:name,
-			
 			src:url,
 			time:date.toLocaleDateString()+' at '+date.toLocaleTimeString(),
 			author:Meteor.userId(),
-			userEmail:Meteor.user().emails[0].address,
-			category:cat	
+			userEmail:Meteor.user().username,
+			category:cat,
+			//image:img	
 		});
 		Session.set('adding_interest',false);
 	},

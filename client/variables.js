@@ -7,15 +7,15 @@ articles: function(){
   }});
 },
 adding_interest: function(){ 
-	return Session.get('adding_interest');
+  return Session.get('adding_interest');
 },
 
 numlikes: function(){
-	return Likes.find({article:this._id}).count();
+  return Likes.find({article:this._id}).count();
 },
 
 updated :function(){
-	return Session.get('updated');
+  return Session.get('updated');
 }
 
 
@@ -30,15 +30,15 @@ ent: function(){
   }});
 },
 adding_interest: function(){ 
-	return Session.get('adding_interest');
+  return Session.get('adding_interest');
 },
 
 numlikes: function(){
-	return Likes.find({article:this._id}).count();
+  return Likes.find({article:this._id}).count();
 },
 
 updated :function(){
-	return Session.get('updated');
+  return Session.get('updated');
 }
 
 });
@@ -51,15 +51,15 @@ bus: function(){
   }});
 },
 adding_interest: function(){ 
-	return Session.get('adding_interest');
+  return Session.get('adding_interest');
 },
 
 numlikes: function(){
-	return Likes.find({article:this._id}).count();
+  return Likes.find({article:this._id}).count();
 },
 
 updated :function(){
-	return Session.get('updated');
+  return Session.get('updated');
 }
 
 });
@@ -73,15 +73,15 @@ hea: function(){
   }});
 },
 adding_interest: function(){ 
-	return Session.get('adding_interest');
+  return Session.get('adding_interest');
 },
 
 numlikes: function(){
-	return Likes.find({article:this._id}).count();
+  return Likes.find({article:this._id}).count();
 },
 
 updated :function(){
-	return Session.get('updated');
+  return Session.get('updated');
 }
 
 });
@@ -95,15 +95,15 @@ nat: function(){
   }});
 },
 adding_interest: function(){ 
-	return Session.get('adding_interest');
+  return Session.get('adding_interest');
 },
 
 numlikes: function(){
-	return Likes.find({article:this._id}).count();
+  return Likes.find({article:this._id}).count();
 },
 
 updated :function(){
-	return Session.get('updated');
+  return Session.get('updated');
 }
 
 });
@@ -117,15 +117,15 @@ tra: function(){
   }});
 },
 adding_interest: function(){ 
-	return Session.get('adding_interest');
+  return Session.get('adding_interest');
 },
 
 numlikes: function(){
-	return Likes.find({article:this._id}).count();
+  return Likes.find({article:this._id}).count();
 },
 
 updated :function(){
-	return Session.get('updated');
+  return Session.get('updated');
 }
 
 });
@@ -139,70 +139,125 @@ tech: function(){
   }});
 },
 adding_interest: function(){ 
-	return Session.get('adding_interest');
+  return Session.get('adding_interest');
 },
 
 numlikes: function(){
-	return Likes.find({article:this._id}).count();
+  return Likes.find({article:this._id}).count();
 },
 
 updated :function(){
-	return Session.get('updated');
+  return Session.get('updated');
 }
 
 });
 
 Template.nav.helpers({
-	Cat:function(){
-		 return Categories.find({});
-	}
+  Cat:function(){
+     return Categories.find({});
+  }
 });
 
+Template.addform.helpers({
+  Cat:function(){
+     return Categories.find({});
+  }
+});
 Template.article.helpers({
-	numlikes: function(){
-	return Likes.find({article:this._id}).count();
+  numlikes: function(){
+  return Likes.find({article:this._id}).count();
 },
 
 
 likethis :function(){
-	var curUserlike = Likes.findOne({muser:Meteor.userId(),article:this._id});
-	if(curUserlike){
-	return "You Like This";
+  var curUserlike = Likes.findOne({muser:Meteor.userId(),article:this._id});
+  if(curUserlike){
+  return "You Like This";
     }
     else{
-    	return "Give a thumbs up!";
+      return "Give a thumbs up!";
     }
 },
 articleList: function(){
-	Articles.find({catName:Session.get('category')});
-}
+  Articles.find({catName:Session.get('category')});
+},
+userLikes :function(){
+  var curUserlike = Likes.findOne({muser:Meteor.userId(),article:this._id});
+   var userId = Meteor.userId();
 
+  if(curUserlike){
+   return true;
+    } 
+}
+});
+
+Template.post.helpers({
+  numlikes: function(){
+  return Likes.find({article:this._id}).count();
+},
+adding_interest: function(){ 
+  return Session.get('adding_interest');
+},
+
+
+comments:function(){
+  return Comments.find({article:this._id});
+},
+
+
+likethis :function(){
+  var curUserlike = Likes.findOne({muser:Meteor.userId(),article:this._id});
+  if(curUserlike){
+  return "You Like This";
+    }
+    else{
+      return "Give a thumbs up!";
+    }
+},
+articleList: function(){
+  Posts.find({catName:Session.get('category')});
+},
+userLikes :function(){
+  var curUserlike = Likes.findOne({muser:Meteor.userId(),article:this._id});
+   var userId = Meteor.userId();
+
+  if(curUserlike){
+   return true;
+    } 
+},
+sourceLink: function(){
+  return "http://localhost:3000/article/"+this._id;
+}
+});
+
+Template.profile.helpers({
+articles: function(){
+  var userId = Meteor.userId();
+  return Articles.find({author:userId} ,{transform: function (doc ){
+    doc.isAuthor = doc.author === userId; 
+    return doc;
+  }});
+},
+
+adding_interest: function(){ 
+  return Session.get('adding_interest');
+},
+
+numlikes: function(){
+  return Likes.find({article:this._id}).count();
+},
+
+updated :function(){
+  return Session.get('updated');
+},
+ 
+userName:function(){
+  return Meteor.user().username ;
+}
 });
 
 
-Template.pinterest.rendered = function(){
-// 	setTimeout(function(){
-// 		masonize(function(){
-// 		}
-// 		);
-		
-// 	},1000)
-// 	$('.search-query input').focus();
 
-// 	function masonize(callback){
-// 	var $container = $('#gutter-opt-demo3');
-// 	// initialize
-// 	$container.masonry({
-// 	  itemSelector: '.item',
-// 	  gutter:20
-// 	});
-// 	var msnry = $container.data('masonry');
-// 	if(callback){callback()};
-// }
-// function getRandomInt (min, max) {
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-// }	
-}
 
 
 
