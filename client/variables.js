@@ -16,8 +16,13 @@ numlikes: function(){
 
 updated :function(){
   return Session.get('updated');
-}
-
+},
+images: function () {
+    return Images.find(); // Where Images is an FS.Collection instance
+  },
+  numComms:function(){
+    return Comments.find({article:this._id}).count();
+  }
 
 });
 
@@ -39,13 +44,38 @@ numlikes: function(){
 
 updated :function(){
   return Session.get('updated');
-}
+},
+images: function () {
+    return Images.find(); // Where Images is an FS.Collection instance
+  }
 
 });
 Template.business.helpers({
 bus: function(){
   var userId = Meteor.userId();
   return Articles.find({category:'Business'} ,{transform: function (doc ){
+    doc.isAuthor = doc.author === userId; 
+    return doc;
+  }});
+},
+adding_interest: function(){ 
+  return Session.get('adding_interest');
+},
+
+numlikes: function(){
+  return Likes.find({article:this._id}).count();
+},
+
+updated :function(){
+  return Session.get('updated');
+}
+
+});
+
+Template.food.helpers({
+food: function(){
+  var userId = Meteor.userId();
+  return Articles.find({category:'Food'} ,{transform: function (doc ){
     doc.isAuthor = doc.author === userId; 
     return doc;
   }});
@@ -152,6 +182,7 @@ updated :function(){
 
 });
 
+
 Template.nav.helpers({
   Cat:function(){
      return Categories.find({});
@@ -167,8 +198,13 @@ Template.article.helpers({
   numlikes: function(){
   return Likes.find({article:this._id}).count();
 },
-
-
+ numComms:function(){
+    return Comments.find({article:this._id}).count();
+  },
+images: function () {
+ 
+    return Images.find({});
+  },
 likethis :function(){
   var curUserlike = Likes.findOne({muser:Meteor.userId(),article:this._id});
   if(curUserlike){

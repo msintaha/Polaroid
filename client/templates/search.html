@@ -1,0 +1,34 @@
+<template name="search">
+	{{>nav}}
+	<input type="hidden" name="updated" value="{{updated}}" id="updated" >
+	{{#if adding_interest}}
+	{{>addform}}
+	{{/if}}
+	
+<div id="container" class="animated bounceInLeft">
+<div class="ui green labels" style="text-align:center;">
+  <a class="ui huge label animated infinite bounce" >
+    Filter By Hashtags 
+  </a>
+  </div>
+<div class="ui fluid icon input">
+   {{> esInput index="articles" placeholder="Search Posts by Hashtags" }}
+  <i class="search icon"></i>
+</div>
+</div>	
+<div class="grid">
+   <ul class="clearfix" >
+        {{#esEach index="articles"}}
+            <li>{{>article}}</li>
+        {{/esEach}}
+    </ul>
+</div>
+    
+    <style type="text/css">
+    #container{
+    	width:85%;
+    	margin-left: auto;
+    	margin-right: auto;
+    }
+    </style>
+</template>

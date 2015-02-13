@@ -4,18 +4,21 @@
 	{{#if adding_interest}}
 	{{>addform}}
 	{{/if}}
-
+<div class="animated tada">
 <div style="width:900px;margin-left:auto;margin-right:auto;" class="ui segment">
   <img class="ui centered image" src="{{src}}">
   <h1 class="ui orange header">
   {{name}}
 </h1>
-<i class="clock icon"></i>{{time}}<br><br>
+<i class="clock icon"></i>{{time}}&nbsp;&nbsp;
 <a class="ui image label">
   <img src="{{src}}">
   Posted by {{userEmail}}
-</a>&nbsp;&nbsp;<div class="ui green horizontal label"><a href="/{{category}}">{{category}}</a></div>
-<br><br><p>{{description}}</p>
+</a>
+<br><br>
+<a class="ui red ribbon label">{{category}}</a>
+<br><br>
+<p>{{description}}</p>
 <br><div class="ui secondary pointing menu">
   <a class="active item">
     <i class="comments icon"></i> COMMENTS
@@ -49,6 +52,7 @@
     </div>
   </form>
   {{/if}}
+</div>
 </div>
 </div>
 </template>

@@ -12,13 +12,15 @@ Meteor.startup(function(){
 
 
 	});*/
+Categories.insert({catgry:'Food'}); 
 if(Categories.find().count() === 0){
        Categories.insert({catgry:'Travel'});
       Categories.insert({catgry:'Technology'});
          Categories.insert({catgry:'Entertainment'});
          Categories.insert({catgry:'Business'});
-         Categories.insert({catgry:'Cause or Community'});
+         Categories.insert({catgry:'Nature'});
         Categories.insert({catgry:'Health'}); 
+	Categories.insert({catgry:'Food'}); 
 }
     
 });

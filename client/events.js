@@ -35,9 +35,9 @@ Template.nav.events({
 		evt.preventDefault();
 		Session.set('adding_interest',true);
 	},
-	'click .search':function(evt,tmpl){
-		var hash=tmpl.data.hashtag;
-		Articles.find( { hashtag: hash} );
+	'click #search':function(evt,tmpl){
+		var hash=tmpl.find('.hash').value;
+		return Articles.find( { hashtag: hash} );
 	}
 	
 });
@@ -47,20 +47,25 @@ Template.addform.events({
       Images.insert(file, function (err, fileObj) {
         //Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
       });
+      Session.set('adding_interest',true);
     });
+
   },
+
 	'click .save':function(evt,tmpl){
 		var description = tmpl.find('.description').value;
 		var name = tmpl.find('.name').value;
 		var url = tmpl.find('.url').value;
 		var date=new Date();
 		var cat = tmpl.find('.selectCat').value;
+		var hashie=tmpl.find('.hash').value;
 		//var img=file.name;
 		
 		Articles.insert({
 			description:description,
 			name:name,
 			src:url,
+			hashtag:hashie,
 			time:date.toLocaleDateString()+' at '+date.toLocaleTimeString(),
 			author:Meteor.userId(),
 			userEmail:Meteor.user().username,

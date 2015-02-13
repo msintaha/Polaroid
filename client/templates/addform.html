@@ -37,6 +37,7 @@ $('.ui.form')
     <div class="field">
     <label>Url of Image</label>
     <input placeholder="Url" name="url" class="url" type="text">
+  <!--   <input type="file" class="img"> -->
   </div>
 
 
@@ -48,15 +49,16 @@ $('.ui.form')
   <div class="field">
   <label>Category</label>
   	<select class="selectCat">
-  <option value="Technology">Technology</option>
-  <option value="Travel">Travel</option>
-  <option value="Entertainment">Entertainment</option>
-  <option value="Business">Business</option>
-  <option value="Health">Health</option>
-  <option value="Nature">Nature</option>
+     {{#each Cat}}
+  <option value="{{catgry}}">{{catgry}}</option>
+  {{/each}}
 </select>
   </div>
 
+<div class="field">
+  <label>Hashtag</label>
+   <input placeholder="Hashtag" name="hash" class="hash" type="text">
+</div>
 
   </div><br>
 

@@ -1,4 +1,4 @@
-<template name="travel">
+<template name="food">
 	  {{>nav}}
 	<input type="hidden" name="updated" value="{{updated}}" id="updated">
 	{{#if adding_interest}}
@@ -6,7 +6,7 @@
 	{{/if}}
 	<div class="animated bounceInUp">
 		<ul class="clearfix" >
-		{{#each tra}}
+		{{#each food}}
 	<li style="margin-right: 1%;">{{>article}}</li>
 			 
 		{{/each}}

@@ -12,6 +12,7 @@ Meteor.startup(function(){
 
 
 	});*/
+
 if(Categories.find().count() === 0){
        Categories.insert({catgry:'Travel'});
       Categories.insert({catgry:'Technology'});
@@ -19,6 +20,7 @@ if(Categories.find().count() === 0){
          Categories.insert({catgry:'Business'});
          Categories.insert({catgry:'Nature'});
         Categories.insert({catgry:'Health'}); 
+	Categories.insert({catgry:'Food'}); 
 }
     
 });

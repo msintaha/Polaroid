@@ -17,9 +17,12 @@
           </div>
         </div>
       </div>
- <!-- <iframe height="{{height}}" src="{{src}}"></iframe>-->
+
   
   <img src="{{src}}"/>
+<!--  {{#each images}}  
+    <img src="{{src}}" alt="" class="thumbnail" />
+  {{/each}} -->
 
 
   <script>$('.special.cards .image').dimmer({
@@ -30,7 +33,14 @@
     <div class="content">
       <a class="header" href="/article/{{_id}}" target="_blank">{{name}}</a>
       <div class="meta">
-        <span class="date">{{time}}</span><br><br><div class="ui red horizontal label"><a href="/{{category}}">{{category}}</a></div>&nbsp;<a href="/article/{{_id}}/"><i class="comments outline icon" style="font-size: 17px;color:#564f8a;"></i></a>
+        <span class="date">{{time}}</span><br>
+        {{hashtag}}
+        <br><a href="/{{category}}"><div class="ui yellow horizontal label">{{category}}</div></a>&nbsp;
+       <a href="/article/{{_id}}/">
+        <div class="ui blue label">
+        <i class="comments outline icon icon"></i> {{numComms}}
+        </div>
+      </a>&nbsp;
       </div>
     </div>
     <div class="extra content">
@@ -42,9 +52,10 @@
       <i style="color:#564f8a;" class="heart icon"></i>
       </a>
     
-      <a class="ui purple circular label">
-              {{numlikes}} likes
-               </a>&nbsp;&nbsp;
+    
+     <div class="ui purple label">
+        <i class="thumbs up icon"></i>{{numlikes}} 
+        </div>&nbsp;&nbsp;
         <div class="ui red horizontal label">{{likethis}}</div><br>
       {{#if isAuthor}}
       <a class="remove"><i style="color:#d95c5c;" class="remove icon">{{removeArticle}}</i></a>
