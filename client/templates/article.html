@@ -34,7 +34,7 @@
       <a class="header" href="/article/{{_id}}" target="_blank">{{name}}</a>
       <div class="meta">
         <span class="date">{{time}}</span><br>
-        {{hashtag}}
+        
         <br><a href="/{{category}}"><div class="ui yellow horizontal label">{{category}}</div></a>&nbsp;
        <a href="/article/{{_id}}/">
         <div class="ui blue label">
@@ -52,17 +52,18 @@
       <i style="color:#564f8a;" class="heart icon"></i>
       </a>
     
-    
+    <a href="#" class="like">
      <div class="ui purple label">
         <i class="thumbs up icon"></i>{{numlikes}} 
-        </div>&nbsp;&nbsp;
+        </div></a>&nbsp;&nbsp;
         <div class="ui red horizontal label">{{likethis}}</div><br>
       {{#if isAuthor}}
       <a class="remove"><i style="color:#d95c5c;" class="remove icon">{{removeArticle}}</i></a>
       <!--&nbsp;<a class="edit"><i style="color:#d95c5c;" class="write icon"></i></a>-->
-          {{/if}}<br>
-
-          
+          {{/if}}<br><br>
+<div class="description">
+{{hashtag}}
+   </div>       
     </p><br>
     {{/if}} 
       </a>
