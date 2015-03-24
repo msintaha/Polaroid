@@ -1,7 +1,7 @@
 <template name="article">
 
 
-   <div class="item">
+     <div class="item">
     <div class="ui special cards">
   <div class="card">
     <div class="dimmable image">
@@ -19,11 +19,11 @@
       </div>
 
   
-  <img src="{{src}}"/>
-<!--  {{#each images}}  
-    <img src="{{src}}" alt="" class="thumbnail" />
-  {{/each}} -->
+ <!--  <img src="/home/mifta/imageStuff/{{imgname}}"/> -->
 
+  {{#each img}}
+       <img src="{{this.url}}" alt="thumbnail" class="thumbnail"/>
+    {{/each}}
 
   <script>$('.special.cards .image').dimmer({
   on: 'hover'
@@ -48,7 +48,6 @@
       
       {{#if currentUser}}   
     <p>
-    
     <a href="#" class="like">
      <div class="ui purple label">
         <i class="thumbs up icon"></i>{{numlikes}} 
@@ -56,7 +55,6 @@
         <div class="ui red horizontal label">{{likethis}}</div><br>
       {{#if isAuthor}}
       <a class="remove"><i style="color:#d95c5c;" class="remove icon">{{removeArticle}}</i></a>
-      <!--&nbsp;<a class="edit"><i style="color:#d95c5c;" class="write icon"></i></a>-->
           {{/if}}<br>
 <div class="description">
 {{hashtag}}

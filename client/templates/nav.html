@@ -13,11 +13,20 @@
   <a class="item addInterest ">
 <i class="add circle icon"></i>Add Polaroid
   </a>
+   <a class="item" href="/login" id="logout">
+    Logout
+  </a>
+  <a href="/profile" class="item">
+    <i class="user icon"></i> <u>{{username}}</u>
+  </a>
+  {{else}}
+   <a class="item" href="/login">
+    Login
+  </a>
   {{/if}}
   
-  <a class="item">
-    <i class="user icon"></i> {{>loginButtons}}
-  </a>
+ 
+  
 
    <div class="ui pointing dropdown link item">
       <i class="dropdown icon"></i>

@@ -17,14 +17,13 @@ numlikes: function(){
 updated :function(){
   return Session.get('updated');
 },
-images: function () {
-    return Images.find(); // Where Images is an FS.Collection instance
-  },
+
   numComms:function(){
     return Comments.find({article:this._id}).count();
   }
 
 });
+
 
 Template.entertainment.helpers({
 ent: function(){
@@ -44,10 +43,7 @@ numlikes: function(){
 
 updated :function(){
   return Session.get('updated');
-},
-images: function () {
-    return Images.find(); // Where Images is an FS.Collection instance
-  }
+}
 
 });
 Template.business.helpers({
@@ -186,8 +182,12 @@ updated :function(){
 Template.nav.helpers({
   Cat:function(){
      return Categories.find({});
-  }
+  },
+  username:function(){
+  return Meteor.users.findOne(Meteor.userId()).username;
+}
 });
+
 
 Template.addform.helpers({
   Cat:function(){
@@ -198,12 +198,15 @@ Template.article.helpers({
   numlikes: function(){
   return Likes.find({article:this._id}).count();
 },
+
+img: function () {
+   var c=Articles.find({}).count();
+   c--;
+  return Images.find(Articles.find({}).fetch()[c].imgid); // Where Images is an FS.Collection instance
+  //return Images.find();
+  },
  numComms:function(){
     return Comments.find({article:this._id}).count();
-  },
-images: function () {
- 
-    return Images.find({});
   },
 likethis :function(){
   var curUserlike = Likes.findOne({muser:Meteor.userId(),article:this._id});
@@ -239,7 +242,14 @@ adding_interest: function(){
 comments:function(){
   return Comments.find({article:this._id});
 },
-
+isPoster:function(){
+  if(Meteor.userId()=== Comments.findOne({poster:this.user().username})){
+    return true;
+  }
+  else{
+    return false;
+  }
+},
 
 likethis :function(){
   var curUserlike = Likes.findOne({muser:Meteor.userId(),article:this._id});
@@ -274,7 +284,14 @@ articles: function(){
     return doc;
   }});
 },
-
+pins:function(){
+ //  var count=Likes.find().count();
+ // for(var i=0;i<count;i++){
+ //  if(Likes.find().fetch()[i].muser===Meteor.userId()){
+ //    return Articles.find(Likes.find().fetch()[i].article);
+ //  }
+ // }
+},
 adding_interest: function(){ 
   return Session.get('adding_interest');
 },

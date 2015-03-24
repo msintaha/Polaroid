@@ -1,17 +1,4 @@
 Meteor.startup(function(){
-	/*return Meteor.methods({
-		'removeArticles':function(){
-			Articles.remove({});
-		},
-		'removeLike':function(){
-			Likes.remove({_id:id});
-		},
-                'removeArticle': function(id){
-                      Articles.remove({_id:id});
-                }
-
-
-	});*/
 
 if(Categories.find().count() === 0){
        Categories.insert({catgry:'Travel'});

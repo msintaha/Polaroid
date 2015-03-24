@@ -14,8 +14,35 @@ Template.article.events({
 	},
 	
 });
-
+Template.login.events({
+	'click #login':function(evt,tmpl){
+		evt.preventDefault();
+		var userName=tmpl.find('.login-username').value;
+		var passWord=tmpl.find('.login-password').value;
+		Meteor.loginWithPassword(userName,passWord);
+		Router.go('/myproject');
+	}
+});
+Template.register.events({
+	'click #register':function(evt,tmpl){
+		evt.preventDefault();
+		var userName=tmpl.find('.username').value;
+		var passWord=tmpl.find('.password').value;
+		var emailVar=tmpl.find('.email').value;
+		Accounts.createUser({
+			username:userName,
+			email:emailVar,
+			password:passWord
+		});
+		Router.go('/myproject');
+	}
+});
 Template.post.events({
+	'click #removec':function(evt,tmpl){
+			evt.preventDefault();
+			var id=tmpl.data._id;
+	 Comments.remove({_id:id});
+	},
 	'click #cmnt':function(evt,tmpl){
 		evt.preventDefault();
 		var comment=tmpl.find('.please').value;
@@ -38,6 +65,10 @@ Template.nav.events({
 	'click #search':function(evt,tmpl){
 		var hash=tmpl.find('.hash').value;
 		return Articles.find( { hashtag: hash} );
+	},
+	'click #logout':function(evt){
+		evt.preventDefault();
+		Meteor.logout();
 	}
 	
 });
@@ -46,6 +77,8 @@ Template.addform.events({
     FS.Utility.eachFile(event, function(file) {
       Images.insert(file, function (err, fileObj) {
         //Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+        //Images.findOne({},{date:1}).original.name
+        Session.set('imageId',fileObj._id);
       });
       Session.set('adding_interest',true);
     });
@@ -55,16 +88,20 @@ Template.addform.events({
 	'click .save':function(evt,tmpl){
 		var description = tmpl.find('.description').value;
 		var name = tmpl.find('.name').value;
-		var url = tmpl.find('.url').value;
+		
 		var date=new Date();
 		var cat = tmpl.find('.selectCat').value;
 		var hashie=tmpl.find('.hash').value;
-		//var img=file.name;
 		
+		var id=Session.get('imageId');
+		var img=Images.findOne(id).original.name;
+		//images-tkmoadixa96vtZ8xy-blah
+		var temp='images-'+id+'-'+img;
 		Articles.insert({
 			description:description,
 			name:name,
-			src:url,
+			//imgname:temp,
+			imgid:id,
 			hashtag:hashie,
 			time:date.toLocaleDateString()+' at '+date.toLocaleTimeString(),
 			author:Meteor.userId(),

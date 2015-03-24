@@ -1,13 +1,16 @@
-<template name="pinterest">
-	
-	<input type="hidden" name="updated" value="{{updated}}" id="updated">
+<template name="profile">
+	  {{>nav}}
+	  	<input type="hidden" name="updated" value="{{updated}}" id="updated">
 	{{#if adding_interest}}
 	{{>addform}}
 	{{/if}}
+	<h1>{{userName}}</h1>
+
+<br>
 	<div class="animated bounceInUp">
 	
 		<ul class="clearfix" >
-		{{#each articles}}
+		{{#each pins}}
 	<li style="margin-right: 1%;">
 	{{>article}}
 	</li>
@@ -15,6 +18,4 @@
 		{{/each}}
 		</ul>
 </div>
-
-		
 </template>

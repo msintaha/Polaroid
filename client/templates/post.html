@@ -4,7 +4,7 @@
 	{{#if adding_interest}}
 	{{>addform}}
 	{{/if}}
-<div class="animated tada">
+
 <div style="width:900px;margin-left:auto;margin-right:auto;" class="ui segment">
   <img class="ui centered image" src="{{src}}">
   <h1 class="ui orange header">
@@ -26,9 +26,10 @@
   </div>
  <div class="ui comments">
  {{#each comments}}
+
   <div class="comment">
     <a class="avatar">
-      <img src="http://www.tempshstimes.com/static//img/empty_avatar_256x256.png">
+      <img src="/avatar.png">
     </a>
     <div class="content">
       <a class="author">{{poster}}</a>
@@ -54,5 +55,5 @@
   {{/if}}
 </div>
 </div>
-</div>
+
 </template>
