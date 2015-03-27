@@ -19,11 +19,11 @@
       </div>
 
   
- <!--  <img src="/home/mifta/imageStuff/{{imgname}}"/> -->
+  <img src="{{src}}"/>
 
-  {{#each img}}
+<!--   {{#each img}}
        <img src="{{this.url}}" alt="thumbnail" class="thumbnail"/>
-    {{/each}}
+    {{/each}} -->
 
   <script>$('.special.cards .image').dimmer({
   on: 'hover'
@@ -66,12 +66,18 @@
       <div class="ui horizontal divider"><i class="empty star icon"></i>
   </div> 
     <div class="extra content">
+    <i class="remove circle outline icon" style="color:brown;"></i><a id="unpin" style="color:brown;">Unpin</a>
     <div class="right floated author">
     Posted by {{userEmail}}
     </div>
   </div>
   {{/if}} 
     </div>
+     {{#if currentUser}}
+       <div class="ui bottom attached button" id="pinit">
+      <i class="pin icon"></i>
+     Pin it! <a class="ui teal circular label" >{{pinned}}</a>
+    </div>  {{/if}}
   </div>
 </div>
 

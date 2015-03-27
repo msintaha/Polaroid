@@ -204,6 +204,7 @@ img: function () {
    c--;
   return Images.find(Articles.find({}).fetch()[c].imgid); // Where Images is an FS.Collection instance
   //return Images.find();
+  
   },
  numComms:function(){
     return Comments.find({article:this._id}).count();
@@ -217,6 +218,14 @@ likethis :function(){
       return "Give a thumbs up!";
     }
 },
+pinned :function(){
+  var curUserlike = Pinboard.findOne({muser:Meteor.userId(),article:this._id});
+  if(curUserlike){
+  return "You Pinned this";
+    }
+    else{
+      return "+";
+    }},
 articleList: function(){
   Articles.find({catName:Session.get('category')});
 },
@@ -237,7 +246,6 @@ Template.post.helpers({
 adding_interest: function(){ 
   return Session.get('adding_interest');
 },
-
 
 comments:function(){
   return Comments.find({article:this._id});
@@ -285,12 +293,7 @@ articles: function(){
   }});
 },
 pins:function(){
- //  var count=Likes.find().count();
- // for(var i=0;i<count;i++){
- //  if(Likes.find().fetch()[i].muser===Meteor.userId()){
- //    return Articles.find(Likes.find().fetch()[i].article);
- //  }
- // }
+  return Pins.find({post:this._id});
 },
 adding_interest: function(){ 
   return Session.get('adding_interest');

@@ -11,8 +11,41 @@ Template.article.events({
 			evt.preventDefault();
 			var id=tmpl.data._id;
 	 Articles.remove({_id:id});
+	 var count=Likes.find().count();
+	 for(var i=0;i<count;i++){
+	 	if(Likes.find().fetch()[i].article===id){
+	 		var lid=Likes.find().fetch()[0]._id;
+	 		Likes.remove({_id:lid});
+	 	}
+	 }
+	 	 var c=Pinboard.find().count();
+	 for(var i=0;i<c;i++){
+	 	if(Pinboard.find().fetch()[i].article===id){
+	 		var pid=Pinboard.find().fetch()[0]._id;
+	 		Pinboard.remove({_id:pid});
+	 	}
+	 }
 	},
-	
+	'click #unpin':function(evt,tmpl){
+		evt.preventDefault();
+			var id=tmpl.data._id;
+
+			 	 var c=Pinboard.find().count();
+	 for(var i=0;i<c;i++){
+	 	if(Pinboard.find().fetch()[i].article===id){
+	 		var pid=Pinboard.find().fetch()[0]._id;
+	 		Pinboard.remove({_id:pid});
+	 		break;
+	 	}
+	 }
+	},
+	'click #pinit':function(evt,tmpl){
+		var curpin = Pinboard.findOne({muser:Meteor.userId(),article:tmpl.data._id});
+		if(!curpin){
+			Pinboard.insert({muser:Meteor.userId(),article:tmpl.data._id});				
+		} 
+		Session.set('updated',new Date());
+	}
 });
 Template.login.events({
 	'click #login':function(evt,tmpl){
@@ -56,6 +89,23 @@ Template.post.events({
 		Session.set('updated',new Date());
 	}
 });
+Template.profile.events({
+	'click #pin':function(evt){
+		evt.preventDefault();
+		  var count=Likes.find().count();
+ for(var i=0;i<count;i++){
+  if(Pinboard.find().fetch()[i].muser===Meteor.userId()){
+   Pins.insert(
+    Articles.find(Pinboard.find().fetch()[i].article).fetch()[0]
+    );
+  }
+ }
+},
+'click #pins':function(evt){
+		evt.preventDefault();
+		Meteor.call('removePins');
+	}
+});
 
 Template.nav.events({
 	'click .addInterest':function(evt,tmpl){
@@ -69,39 +119,43 @@ Template.nav.events({
 	'click #logout':function(evt){
 		evt.preventDefault();
 		Meteor.logout();
-	}
+	},
+	
+	
 	
 });
 Template.addform.events({
-	 'change .img': function(event, template) {
-    FS.Utility.eachFile(event, function(file) {
-      Images.insert(file, function (err, fileObj) {
-        //Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
-        //Images.findOne({},{date:1}).original.name
-        Session.set('imageId',fileObj._id);
-      });
-      Session.set('adding_interest',true);
-    });
+	 // 'change .img': function(event, template) {
+  //   FS.Utility.eachFile(event, function(file) {
+  //     Images.insert(file, function (err, fileObj) {
+  //       //Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+  //       //Images.findOne({},{date:1}).original.name
+  //       Session.set('imageId',fileObj._id);
+  //     });
+  //     Session.set('adding_interest',true);
+  //   });
 
-  },
+  // },
 
 	'click .save':function(evt,tmpl){
+	//	var file = $('.img').get(0).files[0]
 		var description = tmpl.find('.description').value;
 		var name = tmpl.find('.name').value;
-		
+		var url = tmpl.find('.url').value;
 		var date=new Date();
 		var cat = tmpl.find('.selectCat').value;
 		var hashie=tmpl.find('.hash').value;
 		
-		var id=Session.get('imageId');
-		var img=Images.findOne(id).original.name;
+		//var id=Session.get('imageId');
+		//var img=Images.findOne(id).original.name;
 		//images-tkmoadixa96vtZ8xy-blah
-		var temp='images-'+id+'-'+img;
+		//var temp='images-'+id+'-'+img;
 		Articles.insert({
 			description:description,
 			name:name,
 			//imgname:temp,
-			imgid:id,
+			//imgid:id,
+			src:url,
 			hashtag:hashie,
 			time:date.toLocaleDateString()+' at '+date.toLocaleTimeString(),
 			author:Meteor.userId(),
@@ -109,6 +163,10 @@ Template.addform.events({
 			category:cat,
 			//image:img	
 		});
+		//  fsFile = new FS.File(file);
+		// Images.insert(file, function (err, fileObj) {
+
+  //      });
 		Session.set('adding_interest',false);
 	},
 	

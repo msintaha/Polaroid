@@ -14,23 +14,23 @@
 <i class="add circle icon"></i>Add Polaroid
   </a>
    <a class="item" href="/login" id="logout">
-    Logout
+    <i class="sign out icon"></i> Logout
   </a>
-  <a href="/profile" class="item">
+  <a href="/profile" class="item" id="profile">
     <i class="user icon"></i> <u>{{username}}</u>
   </a>
   {{else}}
    <a class="item" href="/login">
-    Login
+    <i class="sign in icon"></i> Login
   </a>
   {{/if}}
-  
+ 
  
   
 
    <div class="ui pointing dropdown link item">
       <i class="dropdown icon"></i>
-      <span class="text">Categories</span>
+      <span class="text"><i class="list icon"></i> Categories</span>
       <div class="menu">
       {{#each Cat}}
      <a href="/{{catgry}}">   <div class="item catmeow">{{catgry}}</div></a><br>
