@@ -17,3 +17,4 @@ cfs:standard-packages
 cfs:filesystem
 iron:router
 edgee:slingshot
+matteodem:easy-search

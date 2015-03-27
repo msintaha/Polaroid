@@ -19,7 +19,7 @@
       </div>
 
   
-  <img src="{{src}}"/>
+  <img src="/pics/{{imgname}}"/>
 
 <!--   {{#each img}}
        <img src="{{this.url}}" alt="thumbnail" class="thumbnail"/>
@@ -66,7 +66,7 @@
       <div class="ui horizontal divider"><i class="empty star icon"></i>
   </div> 
     <div class="extra content">
-    <i class="remove circle outline icon" style="color:brown;"></i><a id="unpin" style="color:brown;">Unpin</a>
+    <i class="remove circle outline icon" style="color:brown;"></i><a id="unpin" style="color:rgba(165, 42, 42, 0.87);">Unpin</a>
     <div class="right floated author">
     Posted by {{userEmail}}
     </div>
@@ -76,7 +76,7 @@
      {{#if currentUser}}
        <div class="ui bottom attached button" id="pinit">
       <i class="pin icon"></i>
-     Pin it! <a class="ui teal circular label" >{{pinned}}</a>
+     <a class="ui circular label" >{{pinned}}</a>
     </div>  {{/if}}
   </div>
 </div>

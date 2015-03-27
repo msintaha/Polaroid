@@ -198,7 +198,9 @@ Template.article.helpers({
   numlikes: function(){
   return Likes.find({article:this._id}).count();
 },
-
+images:function(){
+  return Images.find({});
+},
 img: function () {
    var c=Articles.find({}).count();
    c--;
@@ -224,7 +226,7 @@ pinned :function(){
   return "You Pinned this";
     }
     else{
-      return "+";
+      return "Pin it!";
     }},
 articleList: function(){
   Articles.find({catName:Session.get('category')});

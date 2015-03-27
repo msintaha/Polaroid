@@ -10,6 +10,8 @@ Template.article.events({
 	'click .remove':function(evt,tmpl){
 			evt.preventDefault();
 			var id=tmpl.data._id;
+			var img_id=Articles.findOne(id).imgid;
+			Images.remove({_id:img_id});
 	 Articles.remove({_id:id});
 	 var count=Likes.find().count();
 	 for(var i=0;i<count;i++){
@@ -29,11 +31,10 @@ Template.article.events({
 	'click #unpin':function(evt,tmpl){
 		evt.preventDefault();
 			var id=tmpl.data._id;
-
-			 	 var c=Pinboard.find().count();
-	 for(var i=0;i<c;i++){
+			var c=Pinboard.find().count();
+	 for(var i=(c-1);i>=0;i--){
 	 	if(Pinboard.find().fetch()[i].article===id){
-	 		var pid=Pinboard.find().fetch()[0]._id;
+	 		var pid=Pinboard.find().fetch()[i]._id;
 	 		Pinboard.remove({_id:pid});
 	 		break;
 	 	}
@@ -92,7 +93,7 @@ Template.post.events({
 Template.profile.events({
 	'click #pin':function(evt){
 		evt.preventDefault();
-		  var count=Likes.find().count();
+		  var count=Pinboard.find().count();
  for(var i=0;i<count;i++){
   if(Pinboard.find().fetch()[i].muser===Meteor.userId()){
    Pins.insert(
@@ -125,37 +126,31 @@ Template.nav.events({
 	
 });
 Template.addform.events({
-	 // 'change .img': function(event, template) {
-  //   FS.Utility.eachFile(event, function(file) {
-  //     Images.insert(file, function (err, fileObj) {
-  //       //Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
-  //       //Images.findOne({},{date:1}).original.name
-  //       Session.set('imageId',fileObj._id);
-  //     });
-  //     Session.set('adding_interest',true);
-  //   });
+	 'change .img': function(event, template) {
+		  FS.Utility.eachFile(event, function(file) {
+      Images.insert(file, function (err, fileObj) {
+        //Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+        Session.set('imageId',fileObj._id);
+      });
+    });
 
-  // },
+  },
 
 	'click .save':function(evt,tmpl){
-	//	var file = $('.img').get(0).files[0]
 		var description = tmpl.find('.description').value;
 		var name = tmpl.find('.name').value;
-		var url = tmpl.find('.url').value;
+		//var url = tmpl.find('.url').value;
 		var date=new Date();
 		var cat = tmpl.find('.selectCat').value;
 		var hashie=tmpl.find('.hash').value;
 		
-		//var id=Session.get('imageId');
-		//var img=Images.findOne(id).original.name;
-		//images-tkmoadixa96vtZ8xy-blah
-		//var temp='images-'+id+'-'+img;
+		var id=Session.get('imageId');
+		var img=Images.findOne(id).copies.images.key;
 		Articles.insert({
 			description:description,
 			name:name,
-			//imgname:temp,
-			//imgid:id,
-			src:url,
+			imgname:img,
+			imgid:id,
 			hashtag:hashie,
 			time:date.toLocaleDateString()+' at '+date.toLocaleTimeString(),
 			author:Meteor.userId(),
