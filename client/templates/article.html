@@ -66,17 +66,21 @@
       <div class="ui horizontal divider"><i class="empty star icon"></i>
   </div> 
     <div class="extra content">
-    <i class="remove circle outline icon" style="color:brown;"></i><a id="unpin" style="color:rgba(165, 42, 42, 0.87);">Unpin</a>
+ <a id="unpin" style="color:#D73E66;">Unpin</a>
     <div class="right floated author">
-    Posted by {{userEmail}}
+
+   Posted by  {{userEmail}} &nbsp;<div class="mini blue ui buttons" id="follow">
+  <div class="ui button">{{followed}}</div>
+</div>
+
     </div>
   </div>
   {{/if}} 
     </div>
      {{#if currentUser}}
        <div class="ui bottom attached button" id="pinit">
-      <i class="pin icon"></i>
-     <a class="ui circular label" >{{pinned}}</a>
+      <i class="pin icon" style="color:#D73E66;"></i>
+     <a class="ui circular label big" style="color:#D73E66;background:transparent;">{{pinned}}</a>
     </div>  {{/if}}
   </div>
 </div>

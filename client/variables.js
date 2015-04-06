@@ -220,10 +220,20 @@ likethis :function(){
       return "Give a thumbs up!";
     }
 },
+ followed :function(){
+    var followed=Articles.findOne(this._id).userEmail;
+    var own=Meteor.user().username;
+  var curFollow = Friends.findOne({muser:Meteor.userId(),friend:followed});
+  if(curFollow){
+  return "Following";
+    }
+    else {
+      return "Follow";
+    }},
 pinned :function(){
   var curUserlike = Pinboard.findOne({muser:Meteor.userId(),article:this._id});
   if(curUserlike){
-  return "You Pinned this";
+  return "You Pinned This";
     }
     else{
       return "Pin it!";
@@ -294,6 +304,19 @@ articles: function(){
     return doc;
   }});
 },
+anyfriend:function(){
+if(Friends.find().count()!=0){
+  return true;
+} else{
+  return false;
+}
+
+},
+friends:function(){
+ var userId = Meteor.userId();
+  return Friends.find({muser:userId});
+},
+
 pins:function(){
   return Pins.find({post:this._id});
 },
@@ -308,7 +331,7 @@ numlikes: function(){
 updated :function(){
   return Session.get('updated');
 },
- 
+
 userName:function(){
   return Meteor.user().username ;
 }

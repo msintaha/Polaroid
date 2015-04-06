@@ -6,8 +6,22 @@
 	{{/if}}
 
 <div class="ui piled segment">
- <center> <h4 class="ui header">Hello, {{userName}}!</h4>
-  <div class="ui inverted purple button" id="pin">Show pins</div>&nbsp;<div class="ui inverted purple button" id="pins">Hide pins</div></center><br>
+ <center> <h4 class="ui header">Hello, {{userName}}!</h4></center>
+ 
+ {{#if anyfriend}}
+ <center><h4>People You Follow</h4></center>
+ <div class="ui divided list" style="background:#eee;width:70%;margin-left:auto;margin-right:auto;padding:7px;border:1px solid #eee;border-radius:4px;">
+ {{#each friends}}
+  <div class="item">
+    <div class="right floated red compact ui button" id="unfollow">Unfollow</div>
+     <img class="ui avatar image" src="/avatar.png">
+    <div class="content">
+      <div class="header">{{friend}}</div>
+    </div>
+  </div>
+  {{/each}}
+</div> {{/if}}<br><br>
+ <center> <div class="ui inverted purple button" id="pin">Show pins</div>&nbsp;<div class="ui inverted purple button" id="pins">Hide pins</div></center><br>
 	<div class="animated bounceInUp">
 		<ul class="clearfix" >
 		{{#each pins}}

@@ -9,10 +9,18 @@ color:#564f8a !important;
 a{
 color:white ;
 }
+.img   {
+padding: 7px;
+color: #D73E66;
+}
+
 .clearfix ul {
   list-style: none;
   display: inline-table;
   
+}
+.ui.inverted.purple.menu {
+background-color: #E21946 !important;
 }
 .clearfix li {
   float: left;
@@ -25,7 +33,7 @@ width:1000px;
 margin-left:auto;
 margin-right:auto;
 text-align:center;
-background-image:url("/Polaroids.jpg");
+/*background-image:url("/Polaroids.jpg");*/
 padding-top: 220px;
 background-size: 100%;
 padding-bottom: 300px;

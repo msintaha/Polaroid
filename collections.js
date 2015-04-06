@@ -9,4 +9,5 @@ Pinboard=new Meteor.Collection('pinboard');
 Images = new FS.Collection("images", {
   stores: [new FS.Store.FileSystem("images", {path: "/home/mifta/Downloads/gitkollage/public/pics"})]
 });
+Friends=new Meteor.Collection('friends');
 

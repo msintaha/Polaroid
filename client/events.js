@@ -28,6 +28,12 @@ Template.article.events({
 	 	}
 	 }
 	},
+	'click #follow':function(evt,tmpl){
+		evt.preventDefault();
+		var id=tmpl.data._id;
+		var followed=Articles.findOne(id).userEmail;
+		Friends.insert({muser:Meteor.userId(),friend:followed});
+	},
 	'click #unpin':function(evt,tmpl){
 		evt.preventDefault();
 			var id=tmpl.data._id;
@@ -102,6 +108,10 @@ Template.profile.events({
   }
  }
 },
+'click #unfollow':function(evt){
+		evt.preventDefault();
+		Friends.remove({_id:this._id});
+	},
 'click #pins':function(evt){
 		evt.preventDefault();
 		Meteor.call('removePins');
@@ -155,8 +165,7 @@ Template.addform.events({
 			time:date.toLocaleDateString()+' at '+date.toLocaleTimeString(),
 			author:Meteor.userId(),
 			userEmail:Meteor.user().username,
-			category:cat,
-			//image:img	
+			category:cat,	
 		});
 		//  fsFile = new FS.File(file);
 		// Images.insert(file, function (err, fileObj) {

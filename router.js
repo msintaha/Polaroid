@@ -12,6 +12,7 @@ this.route('profile', {path: '/profile'});
 	   this.route('health', {path: '/health'});
 	    this.route('nature', {path: '/nature'});
 	     this.route('technology', {path: '/technology'});
+ this.route('food', {path: '/food'});
 	     this.route('search', {path: '/search'});
 	      this.route('login', {path: '/login'});
 	       this.route('register', {path: '/register'});
@@ -22,6 +23,7 @@ this.route('profile', {path: '/profile'});
     }
   });
 });
+ 
 	
 });
 
