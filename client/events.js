@@ -32,7 +32,10 @@ Template.article.events({
 		evt.preventDefault();
 		var id=tmpl.data._id;
 		var followed=Articles.findOne(id).userEmail;
-		Friends.insert({muser:Meteor.userId(),friend:followed});
+		var curFriend = Friends.findOne({muser:Meteor.userId(),friend:followed,article:tmpl.data._id});
+		if(!curFriend){
+			Friends.insert({muser:Meteor.userId(),friend:followed,article:tmpl.data._id});			
+		} 	
 	},
 	'click #unpin':function(evt,tmpl){
 		evt.preventDefault();
@@ -99,6 +102,7 @@ Template.post.events({
 Template.profile.events({
 	'click #pin':function(evt){
 		evt.preventDefault();
+		Meteor.call('removePins');
 		  var count=Pinboard.find().count();
  for(var i=0;i<count;i++){
   if(Pinboard.find().fetch()[i].muser===Meteor.userId()){

@@ -337,6 +337,46 @@ userName:function(){
 }
 });
 
+Template.user.helpers({
+articles: function(){
+  var userId = Meteor.userId();
+  return Articles.find({author:userId} ,{transform: function (doc ){
+    doc.isAuthor = doc.author === userId; 
+    return doc;
+  }});
+},
+anyfriend:function(){
+if(Friends.find().count()!=0){
+  return true;
+} else{
+  return false;
+}
+
+},
+friends:function(){
+ var userId = Meteor.userId();
+  return Friends.find({muser:userId});
+},
+
+theirposts:function(){
+  return Articles.find({userEmail:this.userEmail}).fetch();
+},
+adding_interest: function(){ 
+  return Session.get('adding_interest');
+},
+
+numlikes: function(){
+  return Likes.find({article:this._id}).count();
+},
+
+updated :function(){
+  return Session.get('updated');
+},
+userName:function(){
+  return Meteor.user().username ;
+}
+});
+
 
 
 

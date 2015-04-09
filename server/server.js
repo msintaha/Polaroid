@@ -26,8 +26,8 @@ Meteor.methods({
     },
     'removePinboard': function(id){
       Pinboard.remove({_id:id});
-    },    
-
+    }  
+ 
 	});
 
 
